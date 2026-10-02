@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>/dev/log — Notes from a Programmer's Desk</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="fixed top-0 left-0 right-0 z-50" style="backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(var(--accent-rgb), 0.02); border-bottom: 1px solid var(--border);">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#hero" class="font-mono font-bold text-lg flex items-center" style="color: var(--fg); text-decoration: none;">
+      <span style="color: var(--accent);">/</span>dev<span style="color: var(--muted);">/</span>log<span class="logo-cursor"></span>
+    </a>
+    <div class="hidden md:flex items-center gap-9 font-mono text-sm">
+      <a href="#notes" class="hover-link">notes</a>
+      <a href="#snippets" class="hover-link">snippets</a>
+      <a href="#archive" class="hover-link">archive</a>
+      <a href="#about" class="hover-link">about</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="https://github.com/tailwindlabs/tailwindcss" target="_blank" rel="noopener" class="stat-pill hidden sm:inline-flex" id="ghPill" title="Live from GitHub">
+        <span class="stat-dot"></span>
+        <i class="fas fa-star text-xs" style="color: var(--accent);"></i>
+        <span id="ghStars" data-raw="0">—</span>
+        <span style="color: var(--muted);">·</span>
+        <i class="fas fa-code-branch text-xs" style="color: var(--accent-2);"></i>
+        <span id="ghForks" data-raw="0">—</span>
+      </a>
+      <div class="theme-toggle" role="group" aria-label="Theme selector">
+        <button class="theme-btn active" data-theme="dark" title="Dark" aria-label="Dark theme"><i class="fas fa-moon"></i></button>
+        <button class="theme-btn" data-theme="light" title="Light" aria-label="Light theme"><i class="fas fa-sun"></i></button>
+        <button class="theme-btn" data-theme="cyber" title="Cyber" aria-label="Cyber theme"><i class="fas fa-terminal"></i></button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="relative min-h-screen flex items-center overflow-hidden bg-grid pt-24 pb-20" id="hero">
+  <div class="float-dot" style="width: 500px; height: 500px; top: 5%; left: -150px; background: var(--accent);"></div>
+  <div class="float-dot" style="width: 600px; height: 600px; bottom: -200px; right: -200px; background: var(--accent-2); animation-delay: -5s;"></div>
+  <div class="mouse-glow" id="mouseGlow"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 w-full" style="z-index: 2;">
+    <div class="max-w-5xl">
+      <div class="flex items-center gap-3 mb-8 font-mono text-xs flex-wrap" style="color: var(--muted);">
+        <span class="tag">Issue 042</span><span>·</span>
+        <span>November 12, 2024</span><span>·</span>
+        <span class="flex items-center gap-2"><span class="stat-dot"></span> currently publishing</span>
+      </div>
+
+      <h1 class="font-mono font-bold mb-8" style="font-size: clamp(2.5rem, 7.5vw, 6.5rem); line-height: 1.02; letter-spacing: -0.045em;">
+        <span style="color: var(--muted);">$</span> <span id="typewriter" class="cursor"></span>
+      </h1>
+
+      <p class="font-display text-2xl md:text-3xl mb-5" style="font-style: italic; font-weight: 400; color: var(--fg); line-height: 1.3;">
+        Notes from a programmer's desk — on code, systems, and the strange joy of debugging at 2am.
+      </p>
+
+      <p class="text-base md:text-lg mb-12 max-w-2xl" style="color: var(--muted); line-height: 1.6;">
+        I'm <span style="color: var(--fg); font-weight: 500;">Alex Rivera</span> — software engineer writing about the craft. TypeScript today, Rust tomorrow, assembly for fun. New essay every other Tuesday.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mb-20">
+        <a href="#notes" class="btn-primary">read latest <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="#about" class="btn-secondary"><i class="fas fa-rss text-xs"></i> subscribe</a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl">
+        <div><div class="font-mono font-bold text-3xl md:text-4xl" style="color: var(--accent);">142</div><div class="font-mono text-xs uppercase tracking-widest mt-2" style="color: var(--muted);">essays published</div></div>
+        <div><div class="font-mono font-bold text-3xl md:text-4xl" style="color: var(--accent);">8.2k</div><div class="font-mono text-xs uppercase tracking-widest mt-2" style="color: var(--muted);">regular readers</div></div>
+        <div><div class="font-mono font-bold text-3xl md:text-4xl" style="color: var(--accent);">2d</div><div class="font-mono text-xs uppercase tracking-widest mt-2" style="color: var(--muted);">since last commit</div></div>
+        <div><div class="font-mono font-bold text-3xl md:text-4xl" style="color: var(--accent);">∞</div><div class="font-mono text-xs uppercase tracking-widest mt-2" style="color: var(--muted);">cups of coffee</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs flex flex-col items-center gap-3" style="color: var(--muted);">
+    <span class="tracking-widest uppercase">scroll</span>
+    <div style="width: 1px; height: 30px; background: linear-gradient(to bottom, var(--accent), transparent);"></div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="py-5 border-y marquee-wrap" style="border-color: var(--border); background: var(--bg-elev);">
+  <div class="marquee font-mono text-sm uppercase tracking-widest" style="color: var(--muted);">
+    <span>JavaScript</span><span>·</span><span>TypeScript</span><span>·</span><span>Rust</span><span>·</span><span>Go</span><span>·</span><span>WebAssembly</span><span>·</span><span>PostgreSQL</span><span>·</span><span>Redis</span><span>·</span><span>Docker</span><span>·</span><span>Kubernetes</span><span>·</span><span>Linux</span><span>·</span><span>NeoVim</span><span>·</span>
+    <span>JavaScript</span><span>·</span><span>TypeScript</span><span>·</span><span>Rust</span><span>·</span><span>Go</span><span>·</span><span>WebAssembly</span><span>·</span><span>PostgreSQL</span><span>·</span><span>Redis</span><span>·</span><span>Docker</span><span>·</span><span>Kubernetes</span><span>·</span><span>Linux</span><span>·</span><span>NeoVim</span><span>·</span>
+  </div>
+</div>
+
+<!-- Recent Notes -->
+<section class="py-24 md:py-32 px-6" id="notes">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end justify-between mb-16 flex-wrap gap-6 reveal">
+      <div>
+        <div class="font-mono text-xs uppercase tracking-widest mb-4" style="color: var(--accent);">// recent notes</div>
+        <h2 class="font-display font-black text-5xl md:text-7xl" style="letter-spacing: -0.035em; line-height: 1;">Latest <span style="font-style: italic; font-weight: 400;">writing</span></h2>
+      </div>
+      <a href="#archive" class="btn-secondary">all posts <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="article-card reveal">
+        <div class="flex items-start justify-between mb-6"><div class="card-num">01</div><span class="tag">JavaScript</span></div>
+        <div class="font-mono text-xs mb-4" style="color: var(--muted);">11.12.24 — 8 min read</div>
+        <h3 class="font-display font-bold text-2xl mb-4 leading-tight">On the Quiet Violence of Implicit Conversions</h3>
+        <p class="text-sm mb-8" style="color: var(--muted); line-height: 1.65;">
+          JavaScript will let you add <code class="font-mono px-1.5 py-0.5 rounded text-xs" style="background: rgba(var(--accent-rgb),0.1); color: var(--accent);">[]</code> to <code class="font-mono px-1.5 py-0.5 rounded text-xs" style="background: rgba(var(--accent-rgb),0.1); color: var(--accent);">{}</code> and thank you for it. A field guide to footguns.
+        </p>
+        <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest" style="color: var(--accent);"><span>read essay</span><span class="arrow">→</span></div>
+      </article>
+
+      <article class="article-card reveal">
+        <div class="flex items-start justify-between mb-6"><div class="card-num">02</div><span class="tag">Compilers</span></div>
+        <div class="font-mono text-xs mb-4" style="color: var(--muted);">10.28.24 — 14 min read</div>
+        <h3 class="font-display font-bold text-2xl mb-4 leading-tight">A Lexer, By Hand, On a Sunday Afternoon</h3>
+        <p class="text-sm mb-8" style="color: var(--muted); line-height: 1.65;">Skip the regex. Skip the generator. Two hundred lines of switch statements and you'll understand something new about every language you've ever used.</p>
+        <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest" style="color: var(--accent);"><span>read essay</span><span class="arrow">→</span></div>
+      </article>
+
+      <article class="article-card reveal">
+        <div class="flex items-start justify-between mb-6"><div class="card-num">03</div><span class="tag">Error Handling</span></div>
+        <div class="font-mono text-xs mb-4" style="color: var(--muted);">10.14.24 — 6 min read</div>
+        <h3 class="font-display font-bold text-2xl mb-4 leading-tight">Why I Removed Every Try/Catch From My Codebase</h3>
+        <p class="text-sm mb-8" style="color: var(--muted); line-height: 1.65;">Result types, error channels, and the curious peace of letting things crash loudly in development.</p>
+        <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest" style="color: var(--accent);"><span>read essay</span><span class="arrow">→</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Snippet showcase -->
+<section class="py-24 md:py-32 px-6" id="snippets" style="background: var(--bg-elev);">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-4 lg:sticky" style="top: 120px;">
+        <div class="font-mono text-xs uppercase tracking-widest mb-4" style="color: var(--accent);">// snippet of the week</div>
+        <h2 class="font-display font-black text-4xl md:text-5xl mb-6" style="letter-spacing: -0.03em; line-height: 1.05;">
+          <span style="font-style: italic; font-weight: 400;">useTypewriter</span>() — the hook powering this hero.
+        </h2>
+        <p class="text-base mb-8" style="color: var(--muted); line-height: 1.65;">
+          The blinking greeting at the top of this page isn't a CSS animation — it's a real React hook. Type, pause, delete, advance. Click <em>copy</em> and paste it into your project.
+        </p>
+        <ul class="space-y-3 font-mono text-sm mb-8" style="color: var(--fg-dim);">
+          <li class="flex items-center gap-3"><span style="color: var(--accent);">→</span> zero dependencies</li>
+          <li class="flex items-center gap-3"><span style="color: var(--accent);">→</span> ~30 lines, fully typed</li>
+          <li class="flex items-center gap-3"><span style="color: var(--accent);">→</span> cleanup-safe on unmount</li>
+        </ul>
+        <div class="flex flex-wrap gap-2"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Hooks</span></div>
+      </div>
+
+      <div class="lg:col-span-8">
+        <div class="code-window">
+          <div class="code-header">
+            <div class="flex items-center gap-3">
+              <span class="flex gap-1.5">
+                <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+              </span>
+              <span class="font-mono text-xs" style="color: var(--muted);">useTypewriter.ts</span>
+            </div>
+            <button class="copy-btn" data-target="snippetCode"><span class="copy-flash"></span><i class="fas fa-copy"></i><span class="copy-label">copy</span></button>
+          </div>
+          <pre class="p-6 md:p-7 text-xs md:text-sm overflow-x-auto" style="background: var(--code-bg); margin: 0; line-height: 1.7;"><code id="snippetCode"><span class="tk-com">// A self-cleaning typewriter hook. No deps, ~30 lines.</span>
+<span class="tk-key">import</span> { <span class="tk-var">useState</span>, <span class="tk-var">useEffect</span> } <span class="tk-key">from</span> <span class="tk-str">'react'</span>;
+
+<span class="tk-key">export function</span> <span class="tk-fn">useTypewriter</span>(
+  <span class="tk-var">words</span>: <span class="tk-fn">string</span>[],
+  <span class="tk-var">speed</span> = <span class="tk-num">80</span>,
+  <span class="tk-var">pause</span> = <span class="tk-num">1800</span>,
+) {
+  <span class="tk-key">const</span> [<span class="tk-var">text</span>, <span class="tk-var">setText</span>] = <span class="tk-fn">useState</span>(<span class="tk-str">''</span>);
+  <span class="tk-key">const</span> [<span class="tk-var">i</span>, <span class="tk-var">setI</span>] = <span class="tk-fn">useState</span>(<span class="tk-num">0</span>);
+  <span class="tk-key">const</span> [<span class="tk-var">del</span>, <span class="tk-var">setDel</span>] = <span class="tk-fn">useState</span>(<span class="tk-key">false</span>);
+
+  <span class="tk-fn">useEffect</span>(() <span class="tk-op">=&gt;</span> {
+    <span class="tk-key">const</span> <span class="tk-var">word</span> = <span class="tk-var">words</span>[<span class="tk-var">i</span> % <span class="tk-var">words</span>.<span class="tk-var">length</span>];
+    <span class="tk-key">const</span> <span class="tk-var">delay</span> = <span class="tk-var">del</span> ? <span class="tk-var">speed</span> / <span class="tk-num">2</span> : <span class="tk-var">speed</span>;
+
+    <span class="tk-key">const</span> <span class="tk-var">t</span> = <span class="tk-fn">setTimeout</span>(() <span class="tk-op">=&gt;</span> {
+      <span class="tk-var">setText</span>(<span class="tk-var">del</span>
+        ? <span class="tk-var">word</span>.<span class="tk-fn">slice</span>(<span class="tk-num">0</span>, <span class="tk-var">text</span>.<span class="tk-var">length</span> - <span class="tk-num">1</span>)
+        : <span class="tk-var">word</span>.<span class="tk-fn">slice</span>(<span class="tk-num">0</span>, <span class="tk-var">text</span>.<span class="tk-var">length</span> + <span class="tk-num">1</span>));
+    }, <span class="tk-var">delay</span>);
+
+    <span class="tk-key">if</span> (!<span class="tk-var">del</span> <span class="tk-op">&amp;&amp;</span> <span class="tk-var">text</span> === <span class="tk-var">word</span>) {
+      <span class="tk-key">const</span> <span class="tk-var">p</span> = <span class="tk-fn">setTimeout</span>(() <span class="tk-op">=&gt;</span> <span class="tk-fn">setDel</span>(<span class="tk-key">true</span>), <span class="tk-var">pause</span>);
+      <span class="tk-key">return</span> () <span class="tk-op">=&gt;</span> { <span class="tk-fn">clearTimeout</span>(<span class="tk-var">t</span>); <span class="tk-fn">clearTimeout</span>(<span class="tk-var">p</span>); };
+    }
+    <span class="tk-key">if</span> (<span class="tk-var">del</span> <span class="tk-op">&amp;&amp;</span> <span class="tk-var">text</span> === <span class="tk-str">''</span>) {
+      <span class="tk-fn">setDel</span>(<span class="tk-key">false</span>);
+      <span class="tk-fn">setI</span>(<span class="tk-var">i</span> + <span class="tk-num">1</span>);
+    }
+    <span class="tk-key">return</span> () <span class="tk-op">=&gt;</span> <span class="tk-fn">clearTimeout</span>(<span class="tk-var">t</span>);
+  }, [<span class="tk-var">text</span>, <span class="tk-var">del</span>, <span class="tk-var">i</span>, <span class="tk-var">words</span>, <span class="tk-var">speed</span>, <span class="tk-var">pause</span>]);
+
+  <span class="tk-key">return</span> <span class="tk-var">text</span>;
+}</code></pre>
+        </div>
+
+        <div class="code-window mt-6">
+          <div class="code-header">
+            <div class="flex items-center gap-3">
+              <span class="flex gap-1.5">
+                <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+              </span>
+              <span class="font-mono text-xs" style="color: var(--muted);">usage.tsx</span>
+            </div>
+            <button class="copy-btn" data-target="usageCode"><span class="copy-flash"></span><i class="fas fa-copy"></i><span class="copy-label">copy</span></button>
+          </div>
+          <pre class="p-6 md:p-7 text-xs md:text-sm overflow-x-auto" style="background: var(--code-bg); margin: 0; line-height: 1.7;"><code id="usageCode"><span class="tk-key">function</span> <span class="tk-fn">Hero</span>() {
+  <span class="tk-key">const</span> <span class="tk-var">greeting</span> = <span class="tk-fn">useTypewriter</span>([
+    <span class="tk-str">'hello, traveler.'</span>,
+    <span class="tk-str">'you found /dev/log.'</span>,
+    <span class="tk-str">'console.log(love)'</span>,
+  ]);
+
+  <span class="tk-key">return</span> <span class="tk-op">&lt;</span><span class="tk-var">h1</span><span class="tk-op">&gt;</span>{<span class="tk-var">greeting</span>}<span class="tk-op">&lt;/</span><span class="tk-var">h1</span><span class="tk-op">&gt;</span>;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Archive -->
+<section class="py-24 md:py-32 px-6" id="archive">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-16 reveal">
+      <div class="font-mono text-xs uppercase tracking-widest mb-4" style="color: var(--accent);">// the archive</div>
+      <h2 class="font-display font-black text-5xl md:text-7xl" style="letter-spacing: -0.035em; line-height: 1;">Older <span style="font-style: italic; font-weight: 400;">posts</span></h2>
+      <p class="text-base mt-6 max-w-xl" style="color: var(--muted);">142 essays on programming, written over four years. Filtered here by recency — the full index lives in the JSON.</p>
+    </div>
+
+    <div class="reveal">
+      <a href="#" class="archive-item"><div class="font-mono text-xs w-24 flex-shrink-0" style="color: var(--muted);">09.30.24</div><div class="flex-1 min-w-0"><div class="font-display text-xl md:text-2xl archive-title mb-1" style="font-weight: 700;">The Hidden Cost of Abstraction</div><div class="text-sm" style="color: var(--muted);">Every layer you add is a layer you'll debug. A meditation on when to stop.</div></div><div class="tag hidden md:inline-block">Architecture</div><div class="font-mono text-xs w-16 text-right flex-shrink-0" style="color: var(--muted);">11 min</div></a>
+      <a href="#" class="archive-item"><div class="font-mono text-xs w-24 flex-shrink-0" style="color: var(--muted);">09.18.24</div><div class="flex-1 min-w-0"><div class="font-display text-xl md:text-2xl archive-title mb-1" style="font-weight: 700;">Plain Text Will Outlive Us All</div><div class="text-sm" style="color: var(--muted);">On choosing formats that your grandchildren's operating system can still open.</div></div><div class="tag hidden md:inline-block">Tools</div><div class="font-mono text-xs w-16 text-right flex-shrink-0" style="color: var(--muted);">5 min</div></a>
+      <a href="#" class="archive-item"><div class="font-mono text-xs w-24 flex-shrink-0" style="color: var(--muted);">09.02.24</div><div class="flex-1 min-w-0"><div class="font-display text-xl md:text-2xl archive-title mb-1" style="font-weight: 700;">Garbage Collection, But Make It Personal</div><div class="text-sm" style="color: var(--muted);">What tracing collectors can teach you about letting go of side projects.</div></div><div class="tag hidden md:inline-block">Memory</div><div class="font-mono text-xs w-16 text-right flex-shrink-0" style="color: var(--muted);">9 min</div></a>
+      <a href="#" class="archive-item"><div class="font-mono text-xs w-24 flex-shrink-0" style="color: var(--muted);">08.21.24</div><div class="flex-1 min-w-0"><div class="font-display text-xl md:text-2xl archive-title mb-1" style="font-weight: 700;">A Letter to Junior Me About Imposter Syndrome</div><div class="text-sm" style="color: var(--muted);">Eight things I wish someone had told me in my first year of writing code for money.</div></div><div class="tag hidden md:inline-block">Career</div><div class="font-mono text-xs w-16 text-right flex-shrink-0" style="color: var(--muted);">7 min</div></a>
+      <a href="#" class="archive-item"><div class="font-mono text-xs w-24 flex-shrink-0" style="color: var(--muted);">08.07.24</div><div class="flex-1 min-w-0"><div class="font-display text-xl md:text-2xl archive-title mb-1" style="font-weight: 700;">I Wrote a Database in 200 Lines of Go</div><div class="text-sm" style="color: var(--muted);">A WAL, an LSM-tree, and a HTTP API. Surprised how far you can get on a Saturday.</div></div><div class="tag hidden md:inline-block">Systems</div><div class="font-mono text-xs w-16 text-right flex-shrink-0" style="color: var(--muted);">16 min</div></a>
+      <a href="#" class="archive-item"><div class="font-mono text-xs w-24 flex-shrink-0" style="color: var(--muted);">07.24.24</div><div class="flex-1 min-w-0"><div class="font-display text-xl md:text-2xl archive-title mb-1" style="font-weight: 700;">Stop Using useEffect for Everything</div><div class="text-sm" style="color: var(--muted);">Most effects are an admission that your state model is wrong. A re-education.</div></div><div class="tag hidden md:inline-block">React</div><div class="font-mono text-xs w-16 text-right flex-shrink-0" style="color: var(--muted);">6 min</div></a>
+    </div>
+
+    <div class="mt-12 text-center reveal">
+      <a href="#" class="btn-secondary">browse all 142 essays <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Subscribe -->
+<section class="py-24 md:py-32 px-6" id="about" style="background: var(--bg-elev);">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <div class="font-mono text-xs uppercase tracking-widest mb-4" style="color: var(--accent);">// stay in the loop</div>
+      <h2 class="font-display font-black text-5xl md:text-6xl mb-6" style="letter-spacing: -0.035em; line-height: 1;">Every other <span style="font-style: italic; font-weight: 400;">Tuesday.</span></h2>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--muted); line-height: 1.6;">One essay. No tracking, no ads, no <em>"10x"</em> anything. Unsubscribe with a single click — I won't even be offended.</p>
+    </div>
+
+    <form class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto reveal" id="subForm">
+      <input type="email" placeholder="you@somewhere.dev" required class="input-field flex-1" id="emailInput">
+      <button type="submit" class="btn-primary justify-center">subscribe <i class="fas fa-arrow-right text-xs"></i></button>
+    </form>
+
+    <div id="subToast" class="font-mono text-sm mt-6 text-center opacity-0 transition-opacity duration-500" style="color: var(--accent);">✓ welcome aboard. confirmation pending in your inbox.</div>
+
+    <div class="mt-16 grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto reveal">
+      <div class="text-center"><div class="font-mono font-bold text-2xl mb-2" style="color: var(--accent);">No spam</div><div class="text-sm" style="color: var(--muted);">One email every two weeks. That's it.</div></div>
+      <div class="text-center"><div class="font-mono font-bold text-2xl mb-2" style="color: var(--accent);">No tracking</div><div class="text-sm" style="color: var(--muted);">Self-hosted on a $5 box. No analytics.</div></div>
+      <div class="text-center"><div class="font-mono font-bold text-2xl mb-2" style="color: var(--accent);">No paywall</div><div class="text-sm" style="color: var(--muted);">Free forever. Or until I run out of coffee.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 px-6 border-t" style="border-color: var(--border);">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+      <div class="font-mono text-sm" style="color: var(--muted);">© 2024 Alex Rivera · built with care, not frameworks</div>
+      <div class="flex items-center gap-5">
+        <a href="https://github.com" target="_blank" rel="noopener" class="hover-link text-lg" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com" target="_blank" rel="noopener" class="hover-link text-lg" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="hover-link text-lg" aria-label="RSS"><i class="fas fa-rss"></i></a>
+        <a href="mailto:hi@devlog.example" class="hover-link text-lg" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="text-center font-mono text-xs pt-8" style="border-top: 1px solid var(--border); color: var(--muted);">
+      <span style="color: var(--accent);">$</span> echo "thanks for reading" | sudo tee /dev/stdout
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
